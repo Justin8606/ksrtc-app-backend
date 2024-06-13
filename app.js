@@ -7,7 +7,9 @@ const jwt = require("jsonwebtoken")
 
 
 const user = require("./models/user")
+const buses = require("./models/bus")
 const {userModel} = require("./models/user")
+const {busModel} = require("./models/bus")
 
 const app = express()
 
@@ -64,6 +66,13 @@ app.post("/signin",(req,res)=>{
           res.json(error)
       }
     )  
+})
+
+app.post("/addBus",(req,res)=>{
+    let input = req.body
+    let bus = new busModel(input)
+    bus.save()
+    res.json({"status":"success"})
 })
 
 app.listen(8080,()=>{
